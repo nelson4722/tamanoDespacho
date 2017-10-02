@@ -18,7 +18,7 @@
     
     response.setContentType("application/ms-excel; charset=UTF-8");
     response.setCharacterEncoding("UTF-8");
-    response.setHeader("Content-Disposition","attachment; filename="+URLEncoder.encode("tamañodespacho-"+anio+mes+dia+".csv", "UTF-8"));
+    response.setHeader("Content-Disposition","attachment; filename="+URLEncoder.encode("tamanodespacho-"+anio+mes+dia+".csv", "UTF-8"));
 
         try {
             PrintWriter outx = response.getWriter();

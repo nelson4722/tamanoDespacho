@@ -103,7 +103,7 @@
             $('.demo').daterangepicker({
                 "singleDatePicker": true,
                 "autoApply": true,
-                "minDate": '27/09/2017',
+                "minDate": '02/10/2017',
                 "maxDate": moment().format('DD/MM/YYYY'),
                 "opens": "left",
                 "ranges": {
@@ -177,6 +177,7 @@
     
      <script type="text/javascript">
     function setDate(date){
+        alert(date);
         fecha = date.split("/");
         return "dia="+ fecha[0]+"&mes="+fecha[1]+"&anio="+fecha[2];
     };
