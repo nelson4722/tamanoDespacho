@@ -9,7 +9,6 @@ header('Content-Disposition: attachment; filename=tamanodespacho-'.$anio.$mes.$d
  $csv_end = "  
 ";   
 $csv_sep = ";";  
-$csv_file = "data.csv";  
 $csv="";  
  // create a file pointer connected to the output stream
  $output = fopen('php://output', 'w');
@@ -25,12 +24,12 @@ $csv="";
                             }
  // fetch the data
 
-$conn = mysqli_connect('localhost', 'root', '123456', 'COMMERCE', '3306');
+$conn = mysqli_connect('10.95.17.114', 'rivendel', '123456', 'COMMERCE', '3306');
 if (!$conn) {
     echo('Could not connect to MySQL: ' . mysqli_connect_error());
 }
 
-$res = mysqli_query($conn, "SELECT FIELD5, PARTNUMBER, CODE, CATENTTYPE_ID,`WEIGHT`, MARKFORDELETE FROM datos WHERE fecha ='".$anio.$mes.$dia."'");
+$res = mysqli_query($conn, "SELECT FIELD5, PARTNUMBER, CODE, CATENTTYPE_ID, WEIGHT, MARKFORDELETE FROM datos WHERE fecha =".$anio.$mes.$dia);
  // loop over the rows, outputting them
  while(($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) != NULL) {
     $csv.=$row['FIELD5'].$csv_sep.$row['PARTNUMBER'].$csv_sep.$row['CODE'].$csv_sep.$row['CATENTTYPE_ID'].$csv_sep.$row['WEIGHT'].$csv_sep.$row['MARKFORDELETE'].$csv_end;      

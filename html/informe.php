@@ -13,8 +13,8 @@
         
         <title>Mercadería Antigua</title>
         
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        
+        <link type="text/css" rel="stylesheet" href="bootstrap-3.3.6-dist/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" media="all" href="bootstrap-daterangepicker-master/daterangepicker.css" />
         
         <link rel="icon" type="image/png" href="../paris3.png" />
@@ -143,11 +143,48 @@
         </div>
     </div>
         
+        <?php
+        require_once 'general.php';
+        if(isset($_GET['fecha_consulta']) && isset($_GET['fecha_compara'])) {
+            $fecha_consulta = explode("/", $_GET['fecha_consulta']);
+            
+            $fecha_compara = explode("/", $_GET['fecha_compara']);
+            
+            $dia = $fecha_consulta[0];
+            
+            $mes = $fecha_consulta[1];
+            
+            $anio = $fecha_consulta[2];
+            
+            $diaant = $fecha_compara[0];
+            
+            $mesant = $fecha_compara[1];
+            
+            $anioant = $fecha_compara[2];
+            
+            General($dia, $mes, $anio, $diaant, $mesant, $anioant);
+        }else{
+            $dia = date("d");
+            $mes = date("m");
+            $anio = date("Y");
+
+            $ayer = new DateTime(date("Ymd", strtotime("-1 month")));
+
+            $diaant = date("Ym") . '01';
+
+            $diaant = date("d", strtotime("{$diaant} -1 day"));
+
+            $mesant = $ayer->format("m");
+            $anioant = $ayer->format("Y");
+
+            General($dia, $mes, $anio, $diaant, $mesant, $anioant);
+        }
+        ?>
+
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script type="text/javascript" src="bootstrap-daterangepicker-master/moment.js"></script>
         <script type="text/javascript" src="bootstrap-daterangepicker-master/daterangepicker.js"></script>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
         
         <script type="text/javascript">
             // script daterange picker

@@ -39,18 +39,38 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="http://panelestxd.cencosud.corp/paneles"><img src="paris3.png" width="60" height="60"></a>
+                <a href="http://panelestxd.cencosud.corp/paneles"><img src="paris3.png" width="50" height="50"></a>
                 <span style="font-size: 18px; position: relative; top: 3px; color: #777;">Tamaño de Despacho</span>
             </div>
+
+            <div id="navbar" class="navbar-collapse collapse">
+
+                <ul class="nav navbar-nav navbar-right">
+                    
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['nombre'] . " " . $_SESSION['apellido'];?> 
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-right">
+                                <li><a><h5>Comentarios</h5></a></li>
+                                <li><a href="../txd_auth/help_scripts/close.php"><h5><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</h5></a></li>
+                            </ul>
+                        </li>
+                    
+                </ul>
+            </div>
+                
         </nav>
     </header>
        
     <div class="container">
-        <div class="well well-sm clearfix">
+        <div class="well well-sm">
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-2">
                    <div class="pull-right"><form class="form-inline" id="form1" method="get"  action="info.php" >
                        <div class="form-group" role="group" data-toggle='tooltip' title='Día a consultar'>
+
                         <?php
                             date_default_timezone_set("America/Santiago");
                             if(isset($_GET['fecha_consulta'])){
@@ -84,7 +104,19 @@
                                 echo "<a class='btn btn-success btn-block' id='exportar' href='exportar2.php?mes=$mes&anio=$anio&dia=$dia'>Exportar CSV</a>";
                             ?>
                         </div>
-                       </form> </div>               
+                       </form> </div>  
+                       
+                       <?php
+
+                       //PONER FLAG SEGUN SU LOGICA
+                       $conn = mysqli_connect('localhost', 'root', '123456', 'COMMERCE', '3306');
+                       $res = mysqli_query($conn, "SELECT FIELD5, PARTNUMBER, CODE, CATENTTYPE_ID,`WEIGHT`, MARKFORDELETE FROM datos WHERE fecha ='".$anio.$mes.$dia."'");
+                         // loop over the rows, outputting them
+                         if(($row=mysqli_fetch_array($res, MYSQLI_ASSOC)) == NULL) { 
+                            echo "<div class=\"alert alert-danger\" align=\"center\">No existe informe para descargar en día de hoy.</div>";  
+                        }
+                       ?>    
+
                 </div>
             </div>
         </div>
